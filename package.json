@@ -1,5 +1,5 @@
 {
-  "name": "lobechat-plugin-template",
+  "name": "ghcr-badge",
   "type": "module",
   "scripts": {
     "lint": "eslint ./src --ext .ts",
@@ -10,7 +10,6 @@
     "deploy": "npm-run-all build deploy:wrangler"
   },
   "dependencies": {
-    "@lobehub/chat-plugin-sdk": "^1.32.4",
     "hono": "^4.7.2"
   },
   "devDependencies": {

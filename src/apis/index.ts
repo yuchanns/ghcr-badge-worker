@@ -1,6 +1,7 @@
-import apiWeather from "./weather"
+import apiSize from "./size";
+import apiTags from "./tags";
 
 export const providers: APIProvider[] = [
-  apiWeather,
-  // ...add your providers here
+  apiTags,
+  apiSize,
 ]
