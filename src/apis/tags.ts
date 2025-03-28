@@ -1,18 +1,18 @@
 import { Hono } from "hono/tiny"
-import { makeHeaders } from "../utils";
+import { getBadge, makeHeaders } from "../utils"
 
 const route = new Hono()
 
 export const getTags = async (config: GHCRConfig) => {
-  const url = `https://ghcr.io/v2/${config.owner}/${config.repo}/tags/list`;
+  const url = `https://ghcr.io/v2/${config.owner}/${config.repo}/tags/list`
   const resp = await fetch(url, {
     headers: makeHeaders(config)
-  });
+  })
   const data = await resp.json() as {
     name: string,
     tags: string[],
   }
-  return data.tags || [];
+  return data.tags || []
 }
 
 
@@ -27,7 +27,10 @@ route.basePath("/:owner/:repo")
       owner,
       repo,
     })
-    return c.json({ latest: tags[tags.length - 1] })
+    const badge = getBadge("version", tags[tags.length - 1])
+    return c.html(badge, 200, {
+      "Content-Type": "image/svg+xml",
+    })
   })
   .get("/tags", async (c) => {
     const { owner, repo } = c.req.param()

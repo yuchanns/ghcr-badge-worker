@@ -1,11 +1,8 @@
-import { Service } from "@cloudflare/workers-types"
 import { Hono } from "hono/tiny"
 
 export { }
 
 declare global {
-  interface Bindings { }
-
   interface APIProvider {
     route: Hono
   }

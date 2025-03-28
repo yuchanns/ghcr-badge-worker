@@ -5,7 +5,7 @@ import { Hono } from "hono/tiny"
 import { providers } from "./apis"
 import { bufferMiddleware, loggingMiddleware } from "./middlewares"
 
-const app = new Hono<{ Bindings: Bindings }>().use(
+const app = new Hono().use(
   prettyJSON(),
   logger(),
   cors({
