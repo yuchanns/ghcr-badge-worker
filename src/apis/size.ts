@@ -1,5 +1,6 @@
 import { Hono } from "hono/tiny"
 import { getBadge, makeHeaders } from "../utils"
+import { InvalidError } from "../errors"
 
 const route = new Hono()
 
@@ -19,10 +20,10 @@ export const getManifest = async (config: GHCRConfig, tag = "latest"): Promise<M
     mediaType: string
   }
   if (!manifest) {
-    throw new Error("Manifest is empty")
+    throw new InvalidError("Manifest is empty", config.label)
   }
   if (manifest.errors) {
-    throw new Error(`Manifest contains some error: ${manifest.errors}`)
+    throw new InvalidError(`Manifest contains some error: ${manifest.errors}`, config.label)
   }
 
   if (manifest.mediaType == MEDIA_TYPE_MANIFEST_V2) {
@@ -36,10 +37,10 @@ export const getManifest = async (config: GHCRConfig, tag = "latest"): Promise<M
   if (manifest.mediaType == MEDIA_TYPE_MANIFEST_LIST_V2) {
     const { manifests } = manifest as ManifestListV2
     if (!manifests || manifests.length === 0) {
-      throw new Error("Returned list of manifests is empty")
+      throw new InvalidError("Returned list of manifests is empty", config.label)
     }
     if (!manifests[0].digest) {
-      throw new Error(`Digest of a manifest is empty: ${JSON.stringify(manifests[0])}`)
+      throw new InvalidError(`Digest of a manifest is empty: ${JSON.stringify(manifests[0])}`, config.label)
     }
     return getManifest(config, manifests[0].digest)
   }
@@ -47,14 +48,14 @@ export const getManifest = async (config: GHCRConfig, tag = "latest"): Promise<M
   if (manifest.mediaType == MEDIA_TYPE_OCI_IMAGE_INDEX_V1) {
     const { manifests } = manifest as OCIImageIndexV1
     if (!manifests || manifests.length === 0) {
-      throw new Error("Returned list of manifests is empty")
+      throw new InvalidError("Returned list of manifests is empty", config.label)
     }
     if (!manifests[0].digest) {
-      throw new Error(`Digest of a manifest is empty: ${JSON.stringify(manifests[0])}`)
+      throw new InvalidError(`Digest of a manifest is empty: ${JSON.stringify(manifests[0])}`, config.label)
     }
     return getManifest(config, manifests[0].digest)
   }
-  throw new Error("Unsupported media type")
+  throw new InvalidError("Unsupported media type", config.label)
 }
 
 
@@ -66,11 +67,12 @@ route.basePath("/:owner/:repo")
   .get("/size", async (c) => {
     const tag = c.req.query("tag")
     const { owner, repo } = c.req.param()
-    const manifest = await getManifest({ owner, repo }, tag)
+    const { color: default_color, label = "image size" } = c.req.query()
+    const manifest = await getManifest({ owner, repo, label }, tag)
     const config_size = manifest.config.size ?? 0
     const layers = manifest.layers.map((layer) => layer.size)
     const total_size = layers.reduce((acc, layer) => acc + layer, config_size)
-    const badge = getBadge("image size", formatSize(total_size))
+    const badge = getBadge(label, formatSize(total_size), default_color)
     return c.html(badge, 200, {
       "Content-Type": "image/svg+xml",
     })

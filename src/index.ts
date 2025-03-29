@@ -4,6 +4,8 @@ import { prettyJSON } from "hono/pretty-json"
 import { Hono } from "hono/tiny"
 import { providers } from "./apis"
 import { bufferMiddleware, loggingMiddleware } from "./middlewares"
+import { InvalidError } from "./errors"
+import { getBadge } from "./utils"
 
 const app = new Hono().use(
   prettyJSON(),
@@ -39,6 +41,13 @@ Object.entries(providers).forEach(([_, provider]) => {
 
 app.onError((err, _) => {
   console.error("Error:", err)
+  if (err instanceof InvalidError) {
+    return new Response(getBadge(err.label, "invalid", "#e05d44"), {
+      headers: {
+        "Content-Type": "image/svg+xml",
+      }
+    })
+  }
   return new Response("Internal Server Error", { status: 500 })
 })
 

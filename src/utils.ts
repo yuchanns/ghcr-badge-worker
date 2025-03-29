@@ -22,7 +22,7 @@ export const getBadge = (label: string, value: string, default_color = "#44cc11"
   }
 
   const labelTextWidth = calculateTextWidth(label)
-  const valueTextWidth = calculateTextWidth(value)
+  const valueTextWidth = calculateTextWidth(value ?? "")
 
   const labelWidth = Math.round(labelTextWidth + 20)
   const messageWidth = Math.round(valueTextWidth + 20)
@@ -61,4 +61,25 @@ export const getBadge = (label: string, value: string, default_color = "#44cc11"
       <text x="${labelWidth + messageWidth / 2}" y="14">${value}</text>
     </g>
   </svg>`
+}
+
+const globToRegex = (pattern: string) => {
+  const escapeRegex = (s: string) => s.replace(/[-/\\^$+?.()|[\]{}]/g, "\\$&")
+
+  let regexStr = ""
+  for (const char of pattern) {
+    if (char === "*") {
+      regexStr += ".*"
+    } else if (char === "?") {
+      regexStr += "."
+    } else {
+      regexStr += escapeRegex(char)
+    }
+  }
+  return new RegExp("^" + regexStr + "$")
+}
+
+export const fnmatch = (name: string, pattern: string) => {
+  const regex = globToRegex(pattern)
+  return regex.test(name)
 }

@@ -8,9 +8,12 @@ declare global {
   }
 
   interface GHCRConfig {
-    owner: string;
-    repo: string;
-    userAgent?: string;
+    owner: string,
+    repo: string,
+    label: string,
+    userAgent?: string,
+    trim?: string,
+    ignore?: string
   }
 
   interface ManifestV2 {
