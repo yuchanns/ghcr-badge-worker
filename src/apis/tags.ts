@@ -9,11 +9,14 @@ export const getTags = async (config: GHCRConfig) => {
   const resp = await fetch(url, {
     headers: makeHeaders(config)
   })
+  if (!resp.ok) {
+    throw new InvalidError("Invalid parameter", config.label)
+  }
   const data = await resp.json() as {
     name: string,
     tags: string[],
   }
-  let trim_pattern = "^$"
+  let trim_pattern = ".*"
   if (config.trim == "patch") {
     trim_pattern = "^v?\\d+\\.\\d+\\.\\d+[^.]*$"
   } else if (config.trim == "major") {

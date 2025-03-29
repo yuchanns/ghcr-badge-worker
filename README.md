@@ -1,4 +1,4 @@
-# 🚀 ghcr-badge: Generate GitHub Container Registry Status Badges
+# 🐙 ghcr-badge: Generate GitHub Container Registry Status Badges
 
 ![GitHub license](https://img.shields.io/github/license/yuchanns/ghcr-badge-worker?style=flat-square)
 ![Cloudflare Worker](https://img.shields.io/badge/Cloudflare-Worker-orange?style=flat-square&logo=cloudflare)
@@ -56,9 +56,9 @@ The original site for eggplants/ghcr-badge is no longer available, creating a ne
 - `trim`: Tag trimming option
 
 **Example:**  
-![Tag Example](https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?trim=major)
+![Tag Example](https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?ignore=latest)
 ```
-https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?trim=major
+https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?ignore=latest
 ```
 
 #### 2️⃣ Display Latest Tag
@@ -73,7 +73,7 @@ https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?trim=major
 - `trim`: Tag trimming option
 
 **Example:**  
-![Latest Tag Example](https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/latest_tag?trim=major&label=latest)
+![Latest Tag Example](https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/latest_tag?label=latest)
 ```
 https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/latest_tag?label=latest
 ```
