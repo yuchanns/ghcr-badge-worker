@@ -56,9 +56,9 @@ The original site for eggplants/ghcr-badge is no longer available, creating a ne
 - `trim`: Tag trimming option
 
 **Example:**  
-![Tag Example](https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?ignore=latest)
+![Tag Example](https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/tags?ignore=latest)
 ```
-https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?ignore=latest
+https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/tags?ignore=latest
 ```
 
 #### 2️⃣ Display Latest Tag
@@ -73,9 +73,9 @@ https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/tags?ignore=latest
 - `trim`: Tag trimming option
 
 **Example:**  
-![Latest Tag Example](https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/latest_tag?label=latest)
+![Latest Tag Example](https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/latest_tag?label=latest)
 ```
-https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/latest_tag?label=latest
+https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/latest_tag?label=latest
 ```
 
 #### 3️⃣ Display Image Size
@@ -90,9 +90,9 @@ https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/latest_tag?label=latest
 - `trim`: Tag trimming option
 
 **Example:**  
-![Size Example](https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/size)
+![Size Example](https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/size)
 ```
-https://ghcr-badge.yuchanns.xyz/yuchanns/wxocr/size
+https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/size
 ```
 
 ## 📝 Add to Your README
