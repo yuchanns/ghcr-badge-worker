@@ -12,6 +12,7 @@ export const getBadge = (label: string, value: string, default_color = "#44cc11"
     const charWidths: Record<string, number> = {
       "i": 0.5, "l": 0.5, "j": 0.5, "I": 0.5, "f": 0.6, "r": 0.6, "t": 0.6,
       "m": 1.6, "w": 1.6, "M": 1.6, "W": 1.6, "G": 1.3, "O": 1.3, "Q": 1.3,
+      ".": 0.5, "|": 0.5, "=": 1.0, "-": 0.6, "_": 1.0,
     }
 
     const width = text.split("").reduce((total, char) => {

@@ -24,7 +24,35 @@ export const getTags = async (config: GHCRConfig) => {
   }
   const regex = new RegExp(trim_pattern)
   const ignore = config.ignore || ""
-  const tags = (data.tags || []).
+  const tags = (data.tags || []).sort((a, b) => {
+    // Parse version strings into components
+    const parseVersion = (v: string) => {
+      // Remove leading 'v' if present
+      v = v.replace(/^v/, "")
+      const [version, prerelease] = v.split("-")
+      const [major, minor, patch] = (version || "0.0.0").split(".").map(x => parseInt(x) || 0)
+      return { major, minor, patch, prerelease }
+    }
+
+    const va = parseVersion(a)
+    const vb = parseVersion(b)
+
+    // Compare major.minor.patch
+    if (va.major !== vb.major) return vb.major - va.major
+    if (va.minor !== vb.minor) return vb.minor - va.minor
+    if (va.patch !== vb.patch) return vb.patch - va.patch
+
+    // If one has prerelease and the other doesn't, the one without prerelease is greater
+    if (!va.prerelease && vb.prerelease) return -1
+    if (va.prerelease && !vb.prerelease) return 1
+
+    // If both have prereleases, do string comparison
+    if (va.prerelease && vb.prerelease) {
+      return vb.prerelease.localeCompare(va.prerelease)
+    }
+
+    return b.localeCompare(a)
+  }).
     filter((tag) => regex.test(tag)).
     filter((tag) => !fnmatch(tag, ignore))
   return tags

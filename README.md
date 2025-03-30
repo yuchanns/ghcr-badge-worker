@@ -15,7 +15,7 @@ A lightweight Cloudflare Worker implementation that generates beautiful status b
 
 ## 🤔 Motivation
 
-The original site for eggplants/ghcr-badge is no longer available, creating a need for a self-hosted solution. Cloudflare Workers provide an ideal serverless platform for this service, offering reliability and global distribution.
+The original site for eggplants/ghcr-badge is ~~no longer available~~ often stops working at the end of the month due to the free quota [#195 (comment)](https://github.com/eggplants/ghcr-badge/issues/195#issuecomment-2566003093), creating a need for a self-hosted solution. Cloudflare Workers provide an ideal serverless platform for this service, offering reliability and global distribution.
 
 ## 🛠️ Deployment
 
