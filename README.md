@@ -1,4 +1,4 @@
-# 🐙 ghcr-badge: Generate GitHub Container Registry Status Badges
+# 🐳 ghcr-badge: Generate GitHub Container Registry Status Badges
 
 ![GitHub license](https://img.shields.io/github/license/yuchanns/ghcr-badge-worker?style=flat-square)
 ![Cloudflare Worker](https://img.shields.io/badge/Cloudflare-Worker-orange?style=flat-square&logo=cloudflare)
