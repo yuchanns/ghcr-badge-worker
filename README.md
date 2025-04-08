@@ -54,6 +54,7 @@ The original site for eggplants/ghcr-badge is ~~no longer available~~ often stop
 - `n`: Number of tags to display (default: `3`)
 - `label`: Badge label (default: `image tags`)
 - `trim`: Tag trimming option
+- `cache`: Max-age for the badge (default: `3600`)
 
 **Example:**  
 ![Tag Example](https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/tags?ignore=latest)
@@ -71,6 +72,7 @@ https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/tags?ignore=latest
 - `ignore`: Tag to ignore (default: `latest`)
 - `label`: Badge label (default: `version`)
 - `trim`: Tag trimming option
+- `cache`: Max-age for the badge (default: `3600`)
 
 **Example:**  
 ![Latest Tag Example](https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/latest_tag?label=latest)
@@ -88,6 +90,7 @@ https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/latest_tag?label=latest
 - `tag`: Tag to check size for (default: `latest`)
 - `label`: Badge label (default: `image size`)
 - `trim`: Tag trimming option
+- `cache`: Max-age for the badge (default: `3600`)
 
 **Example:**  
 ![Size Example](https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/size)
@@ -101,6 +104,14 @@ https://ghcr-badge.yuchanns.xyz/containerd/nerdctl/size
 ![Container Tags](https://your-worker-url.workers.dev/username/repo/tags)
 ![Latest Version](https://your-worker-url.workers.dev/username/repo/latest_tag)
 ![Image Size](https://your-worker-url.workers.dev/username/repo/size)
+```
+
+## 🔄 Cache Control
+
+Generated badge will be cached for 3600 seconds in GitHub's [Camo](https://github.com/atmos/camo) server. To update immediately, send PURGE request to the badge Camo link.
+
+```bash
+curl -X PURGE "https://camo.githubusercontent.com/..."
 ```
 
 ## 📄 License

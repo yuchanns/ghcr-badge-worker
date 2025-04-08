@@ -3,7 +3,7 @@ import { logger } from "hono/logger"
 import { prettyJSON } from "hono/pretty-json"
 import { Hono } from "hono/tiny"
 import { providers } from "./apis"
-import { bufferMiddleware, loggingMiddleware } from "./middlewares"
+import { bufferMiddleware, cacheControlMiddleware, loggingMiddleware } from "./middlewares"
 import { InvalidError } from "./errors"
 import { getBadge } from "./utils"
 
@@ -33,7 +33,7 @@ const app = new Hono().use(
 )
 
 app
-  .use(bufferMiddleware, loggingMiddleware)
+  .use(bufferMiddleware, loggingMiddleware, cacheControlMiddleware)
 
 Object.entries(providers).forEach(([_, provider]) => {
   app.route("/", provider.route)
